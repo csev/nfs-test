@@ -53,3 +53,6 @@ kubectl exec -it nfs-server-7b6894fc6f-vjbmw -- /bin/bash
 kubectl run my-shell --rm -i --tty --image ubuntu -- bash
 
 
+    docker tag tsugi_dev:latest us.gcr.io/nd-edu/tsugi_dev:latest
+    gcloud docker -- push us.gcr.io/nd-edu/tsugi_dev:latest
+
