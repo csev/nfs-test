@@ -7,6 +7,7 @@ gcloud container clusters create nd-edu
 gcloud container clusters list
 
 kubectl get services
+
     NAME         TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)   AGE
     kubernetes   ClusterIP   10.11.240.1   <none>        443/TCP   6m
 
