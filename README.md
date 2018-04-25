@@ -1,6 +1,11 @@
 
 https://cloud.google.com/kubernetes-engine/docs/quickstart
 
+gcloud config list
+
+gcloud projects list
+
+gcloud config set project nd-edu
 
 gcloud container clusters create nd-edu
 
@@ -55,4 +60,32 @@ kubectl run my-shell --rm -i --tty --image ubuntu -- bash
 
     docker tag tsugi_dev:latest us.gcr.io/nd-edu/tsugi_dev:latest
     gcloud docker -- push us.gcr.io/nd-edu/tsugi_dev:latest
+
+Enable the Google Cloud SQL API
+
+https://cloud.google.com/sql/docs/mysql/connect-kubernetes-engine
+
+gcloud sql tiers list
+gcloud sql instances create tsugi-sql3 -gce-zone=us-central1-a
+
+    Creating Cloud SQL instance...done.                                                                                                           
+    Created [https://www.googleapis.com/sql/v1beta4/projects/nd-edu/instances/tsugi-sql3].
+    NAME        DATABASE_VERSION  LOCATION       TIER              ADDRESS        STATUS
+    tsugi-sql3  MYSQL_5_6         us-central1-a  db-n1-standard-2  35.193.11.230  RUNNABLE
+
+Note the automatically assigned IP address.  If you are not using the Cloud SQL Proxy,
+you will use this address as the host address that your applications or tools use
+to connect to the instance.
+
+Note - tsugi-sql cannot be re-created for several months :)
+
+gcloud sql instances create tsugi-sql --gce-zone=us-central1-a
+
+gcloud sql users set-password root % --instance tsugi-sql3 --password secret
+
+Connect using Cloud Shell from the instance details in the console
+
+Enable backups and binary logging
+
+Enable high availability and failover
 
